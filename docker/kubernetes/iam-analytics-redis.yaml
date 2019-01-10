@@ -1,0 +1,30 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: flask-starter-redis
+  namespace: flask-starter
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: flask-starter-redis
+      namespace: flask-starter
+    spec:
+      containers:
+      - name: flask-starter-redis
+        image: redis
+        ports:
+        - containerPort: 6379
+          name: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-starter-redis
+  namespace: flask-starter
+spec:
+  ports:
+  - port: 6379
+  selector:
+    app: flask-starter-redis

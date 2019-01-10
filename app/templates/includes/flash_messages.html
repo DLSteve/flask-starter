@@ -1,0 +1,22 @@
+{% if get_flashed_messages(with_categories=True) %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div id="notifications">
+                    {% for category, message in get_flashed_messages(with_categories=True) %}
+                        {% if category == 'error' %}
+                            <div class="alert alert-dismissable alert-danger">
+                        {% elif category == 'success' %}
+                            <div class="alert alert-dismissable alert-success">
+                        {% else %}
+                            <div class="alert alert-dismissable alert-warning">
+                        {% endif %}
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

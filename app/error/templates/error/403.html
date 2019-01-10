@@ -1,0 +1,19 @@
+{% extends "error/base.html" %}
+
+{% block title %}
+    Forbidden
+{% endblock %}
+
+{% block content %}
+    <div class="error-code m-b-10">403 <i class="fa fa-shield"></i></div>
+    <div class="error-content">
+        <div class="error-message">Forbidden!</div>
+        <div class="error-desc m-b-20">
+            The request could not be completed... <br/>
+            You do not have the permissions required to access this resource.
+        </div>
+        <div>
+            <a href="{{ url_for('main.index') }}" class="btn btn-success">Go Back to Home</a>
+        </div>
+    </div>
+{% endblock %}

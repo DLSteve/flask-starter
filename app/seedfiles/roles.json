@@ -1,0 +1,17 @@
+{
+  "Terminated": [
+    "terminated"
+  ],
+  "Unknown": [
+    "default"
+  ],
+  "IAM Operations": [
+    "pwr_upload"
+  ],
+  "DataStudio API User": [
+    "api_pwr_read"
+  ],
+  "Administrator": [
+    "admin"
+  ]
+}

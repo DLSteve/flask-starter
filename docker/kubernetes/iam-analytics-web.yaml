@@ -1,0 +1,80 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: flask-starter-web
+  namespace: flask-starter
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: flask-starter-web
+      namespace: flask-starter
+    spec:
+      containers:
+      - name: flask-starter-web
+        image: iamdockerdev.azurecr.io/iam/web/flask-starter-web:0.2.0
+        ports:
+        - containerPort: 8000
+        env:
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: flask-starter-secrets
+                key: secret_key
+          - name: AZURE_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: flask-starter-secrets
+                key: azure_client_secret
+          - name: AZURE_STORAGE_ACCOUNT_KEY
+            valueFrom:
+              secretKeyRef:
+                name: flask-starter-secrets
+                key: azure_storage_account_key
+          - name: SQLALCHEMY_DATABASE_URI
+            valueFrom:
+              secretKeyRef:
+                name: flask-starter-secrets
+                key: sqlalchemy_database_uri
+          - name: BROKER_URL
+            valueFrom:
+              secretKeyRef:
+                name: flask-starter-secrets
+                key: broker_url
+          - name: RESULT_BACKEND
+            valueFrom:
+              secretKeyRef:
+                name: flask-starter-secrets
+                key: result_backend
+        volumeMounts:
+        - mountPath: /mnt/log
+          name: app-logs
+        - mountPath: /configs
+          name: config
+      imagePullSecrets:
+      - name: iam-registry
+      volumes:
+      - name: app-logs
+        persistentVolumeClaim:
+          claimName: pvc-k8-log
+      - name: config
+        configMap:
+          name: flask-starter-config
+          items:
+          - key: flask-starter
+            path: flask-starter.cfg
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-starter-web
+  namespace: flask-starter
+  annotations:
+      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8000
+  selector:
+    app: flask-starter-web

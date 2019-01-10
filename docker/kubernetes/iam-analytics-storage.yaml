@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-k8-log
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  azureFile:
+    secretName: flask-starter-storage-secrets
+    shareName: k8-log-share
+    readOnly: false
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc-k8-log
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: ""

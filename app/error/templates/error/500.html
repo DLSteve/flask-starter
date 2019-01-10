@@ -1,0 +1,20 @@
+{% extends "error/base.html" %}
+
+{% block title %}
+    Internal Server Error
+{% endblock %}
+
+{% block content %}
+    <div class="error-code m-b-10">500 <i class="fa fa-exclamation-circle"></i></div>
+    <div class="error-content">
+        <div class="error-message">Internal Server Error!</div>
+        <div class="error-desc m-b-20">
+            The request could not be completed... <br/>
+            There was an error in the application.<br/>
+            Error Message: {{ error_message }}
+        </div>
+        <div>
+            <a href="{{ url_for('main.index') }}" class="btn btn-success">Go Back to Home</a>
+        </div>
+    </div>
+{% endblock %}

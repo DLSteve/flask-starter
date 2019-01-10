@@ -1,0 +1,5 @@
+{% extends "page_base.html" %}
+{% block page_content %}
+    <h2>Successfully logged in.</h2>
+    <a href="{{ url_for('profile.me') }}">View Profile</a>
+{% endblock %}

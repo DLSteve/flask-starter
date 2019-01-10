@@ -1,0 +1,22 @@
+apiVersion: v1
+data:
+  flask-starter: |-
+    # General Settings
+    SERVER_NAME = ''
+    PREFERRED_URL_SCHEME = 'https'
+    SESSION_COOKIE_NAME = 'flask-starter'
+    SESSION_COOKIE_DOMAIN = ''
+
+    # Azure AD Settings
+    AZURE_TENANT_ID = ''
+    AZURE_CLIENT_ID = ''
+
+    # Azure Storage Settings
+    AZURE_STORAGE_ACCOUNT_NAME = ''
+    AZURE_STORAGE_CONTAINER_NAME = ''
+    AZURE_STORAGE_DOMAIN = ''
+    AZURE_STORAGE_VIRTUAL_FOLDER_NAME = ''
+kind: ConfigMap
+metadata:
+  name: flask-starter-config
+  namespace: flask-starter

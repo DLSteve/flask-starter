@@ -1,0 +1,51 @@
+{% extends "page_base.html" %}
+{% block page_content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Application Settings</h2>
+                <hr>
+                <h3>API Keys</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="key1">Key 1</label>
+                        <div class="form-row align-items-center">
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="key1" value="{{ key1 }}" readonly>
+                            </div>
+                            <div class="col-auto">
+                                <div class="btn btn-primary"
+                                        data-ic-target="#key1"
+                                        data-ic-get-from="{{ url_for('admin.settings_key_reset', key_num='1') }}"
+                                        data-ic-replace-target="true">Regen Key</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="key2">Key 2</label>
+                        <div class="form-row align-items-center">
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="key2" value="{{ key2 }}" readonly>
+                            </div>
+                            <div class="col-auto">
+                                <div class="btn btn-primary"
+                                        data-ic-target="#key2"
+                                        data-ic-get-from="{{ url_for('admin.settings_key_reset', key_num='2') }}"
+                                        data-ic-replace-target="true">Regen Key</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+    $(document).ready(function () {
+        $(document).on("beforeAjaxSend.ic", function (evt, settings) {
+            settings.headers["X-CSRFToken"] = "{{ csrf_token() }}";
+        });
+    })
+    </script>
+{% endblock %}

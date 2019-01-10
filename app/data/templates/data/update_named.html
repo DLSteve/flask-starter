@@ -1,0 +1,35 @@
+{% extends "page_base.html" %}
+{% block page_content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Update Named Account Password Reset Data</h2>
+                <hr>
+                <h3>Instructions</h3>
+                <p>Ensure that the CSV file follows the format in the example below. Once the file has been uploaded the data will be processed and stored in the database for later retrieval.</p>
+                <p><strong>Note:</strong> The application will automatically remove duplicate entries so there is no negative impact if the same file is accidentally uploaded twice.</p>
+                <div class="card mb-3">
+                    <div class="card-header">Example CSV File for Named Accounts</div>
+                    <div class="card-body">
+                        <pre><code>agent,acct,acct_location,reset_date,reset_day,reset_type,type
+"Clovis Grenier","David Soln","00500","2017-05-01","Monday","Service Desk","Employee"
+"Thomas Gillen","Pete Prikals","00200","2017-05-01","Monday","Service Desk","Employee"
+"Joel Pedrizetti","Dawn Mann","00210","2017-05-01","Monday","Service Desk","Employee"
+"Samantha Bates","Michele Minga","00892","2017-05-01","Monday","Service Desk","Employee"
+"Josh Azad","Sheen Thomas","00099","2017-11-20","Monday","Service Desk","Contractor"
+"Daniel Chavez","Bhanu Pendem","00099","2017-11-20","Monday","Service Desk","Contractor"</code></pre>
+                    </div>
+                </div>
+                <hr>
+                <h4>Upload a File</h4>
+                <form method=post enctype=multipart/form-data class="form-inline">
+                    <label class="custom-file mb-2 mr-sm-2 mb-sm-0 col-sm-5">
+                        <input data-toggle="custom-file" data-target="#csv-upload" type="file" id="file" name=file class="custom-file-input">
+                        <span id="csv-upload" class="custom-file-control custom-file-name" data-content="Named Account CSV..."></span>
+                    </label>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

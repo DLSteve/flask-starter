@@ -1,0 +1,64 @@
+{% extends "page_base.html" %}
+{% block page_content %}
+    <h1>User Profile</h1>
+    <div class="row">
+        <div class="col-6">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td><strong>ID</strong></td>
+                        {% if current_user.id %}
+                        <td>{{ current_user.id }}</td>
+                        {% else %}
+                        <td>N/A</td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <td><strong>User Name</strong></td>
+                        {% if current_user.username %}
+                        <td>{{ current_user.username }}</td>
+                        {% else %}
+                        <td>N/A</td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <td><strong>First Name</strong></td>
+                        {% if current_user.first_name %}
+                        <td>{{ current_user.first_name }}</td>
+                        {% else %}
+                        <td>N/A</td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <td><strong>Last Name</strong></td>
+                        {% if current_user.last_name %}
+                        <td>{{ current_user.last_name }}</td>
+                        {% else %}
+                        <td>N/A</td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <td><strong>Last Login</strong></td>
+                        {% if current_user.last_login %}
+                        <td>{{ current_user.last_login.strftime('%m/%d/%Y %I:%M:%S') }}</td>
+                        {% else %}
+                        <td>N/A</td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <td><strong>Roles</strong></td>
+                        {% if current_user.roles %}
+                        <td>
+                            {% for role in current_user.roles %}
+                                {{ role.name }}{% if not loop.last %}<br>{% endif %}
+                            {% endfor %}
+                        </td>
+                        {% else %}
+                        <td>N/A</td>
+                        {% endif %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
